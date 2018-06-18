@@ -1,0 +1,32 @@
+startup_message off
+defscrollback 10000
+term xterm
+defutf8 on
+shelltitle "$ |bash"
+
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# For ssh-agent, the following is needed, which is defined in bashrc
+. ~/.ssh/environment
+
+hardstatus on
+hardstatus string "%{= bW} %H %{= Kw}|%{-} %-Lw%{= Wb} %n%f* %t%{-}%+Lw %= %{= Kw}|%{-} %{= bW}Load: %l %{= Kw}|%{-} %{..Y} %{Kw}[ %d/%m %c ]"
+hardstatus alwayslastline
+# xterm hardstatus: use the window title.
+termcap  xterm 'B8@:hs:ts=\E]0;:fs=\007:ds=\E]0;Screen\007'
+terminfo xterm 'B8@:hs:ts=\E]0;:fs=\007:ds=\E]0;Screen\007'
+
+# advertise hardstatus support to $TERMCAP
+termcap  * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
+terminfo * '' 'hs:ts=\E_:fs=\E\\:ds=\E_\E\\'
+
+# Switch screen escape to CTRL+a
+escape ^Xa
+
+# Define screen names
+#screen -t "Default" 0
+
+
